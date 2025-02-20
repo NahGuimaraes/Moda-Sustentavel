@@ -1,6 +1,7 @@
 package moda.repository;
 
 import moda.Produto;
+import moda.model.Moda;
 
 public interface ModaRepository {
 
@@ -15,5 +16,6 @@ public interface ModaRepository {
 	public void comprar(int codigo, int quantidade);
 	public void devolver(int codigo, int quantidade);
 	public void atualizarEstoque(int codigo, int quantidade);
+	void cadastrar(Moda produto);
 	
 }

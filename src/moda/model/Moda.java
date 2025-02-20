@@ -87,6 +87,11 @@ public abstract class Moda {
         System.out.println("Material do Produto: " + this.material);
         System.out.println("É Sustentável: " + this.eSustentavel);
     }
+
+	public int getTipo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 }
 
 

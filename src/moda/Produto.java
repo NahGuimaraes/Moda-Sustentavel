@@ -1,10 +1,10 @@
 package moda;
-
+import moda.controller.ModaController;
 import java.io.IOException;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-
+import moda.controller.ModaController;
 import moda.model.Moda;
 import moda.model.ModaOrganica;
 import moda.model.ModaReciclavel;
@@ -12,6 +12,7 @@ import moda.util.Cores;
 
 public class Produto {
 
+	
 	public Produto(int i, String string, String string2, float f) {
 		
 	}
@@ -21,15 +22,21 @@ public class Produto {
 		// TODO Auto-generated constructor stub
 	}
 
+	public Produto(int codigo, String nome, String string, float preco, String tamanho, String cor) {
+		// TODO Auto-generated constructor stub
+	}
+
 
 	public static void main(String[] args) {
+     ModaController produtos = new ModaController();
+		
 		
 	Scanner leia = new Scanner(System.in);
 	
 		int opcao, codigo, tipo, estoque;
 		String nome, descricao, material;
-		
 		float preco;
+		
 		System.out.println("\nCadastrar Produtos\n");
 		Produto p1 = new Produto(1, "Vestido Sustentável", "Vestido feito de material reciclado", 200.0f, "Algodão Orgânico", true);
 		Produto.cadastrar(p1);
@@ -89,29 +96,104 @@ public class Produto {
             switch (opcao1) {
                 case 1:
                     System.out.println("Cadastrar Produto\n\n");
+                    System.out.println("Digite o Código do Produto:");
+                    codigo = leia.nextInt();
+                    System.out.println("Digite o nome do Produto:");
+                    leia.skip("\\R?");
+                    nome = leia.nextLine();
+                    do {
+                        System.out.println("Digite o tipo do Produto (1-Vestido ou 2-Camiseta):");
+                        tipo = leia.nextInt();
+                    }while(tipo < 1 && tipo > 2);
+                    System.out.println("Digite o Preço do Produto (R$): ");
+                    preco = leia.nextFloat();
+                    switch(tipo) {
+                        case 1 -> {
+                            System.out.println("Digite o Material do Produto:");
+                            material = leia.next();
+                            System.out.println("Digite se o Produto é Sustentável (true/false):");
+                            boolean eSustentavel = leia.nextBoolean();
+                            produtos.cadastrar(new Produto(codigo, nome, "", preco, material, eSustentavel));
+                        }
+                        case 2 -> {
+                            System.out.println("Digite o Tamanho do Produto:");
+                            String tamanho = leia.next();
+                            System.out.println("Digite a Cor do Produto:");
+                            String cor = leia.next();
+                            produtos.cadastrar(new Produto(codigo, nome, "", preco, tamanho, cor));
+                        }
                     
+                    }
+            
                     keyPress();
                     break;
                
                 case 2:
+                
+                	System.out.println("Listar todos os Produtos\n\n");
+                    
+                    keyPress();
+                    break;
+            
+               
+                case 3:
+                    System.out.println("Buscar Produto por Nome\n\n");
                     System.out.println("Listar todos os Produtos\n\n");
+                    System.out.println("Digite o código do produto: ");
+                    codigo = leia.nextInt();
+                    produtos.procurarPorCodigo(codigo);
+                
                     
                     keyPress();
                     break;
                 
-                case 3:
-                    System.out.println("Buscar Produto por Nome\n\n");
-                    
-                    keyPress();
-                    break;
                 case 4:
                     System.out.println("Atualizar Dados do Produto\n\n");
                    
+                    System.out.println("Digite o código do produto: ");
+                    codigo = leia.nextInt();
+                    var buscaProduto = produtos.buscarNaCollection(codigo);
+                    if (buscaProduto != null) {
+                        System.out.println("Digite o nome do produto: ");
+                        leia.skip("\\R?");
+                        nome = leia.nextLine();
+                        System.out.println("Digite o preço do produto (R$): ");
+                        preco = leia.nextFloat();
+                        System.out.println("Digite a descrição do produto: ");
+                        leia.skip("\\R?");
+                        descricao = leia.nextLine();
+                        tipo = buscaProduto.getTipo();
+                        switch (tipo) {
+                            case 1 -> {
+                                System.out.println("Digite o material do produto: ");
+                                material = leia.next();
+                                System.out.println("Digite se o produto é sustentável (true/false): ");
+                                boolean eSustentavel = leia.nextBoolean();
+                                produtos.atualizar(new Produto(codigo, nome, descricao, preco, material, eSustentavel));
+                            }
+                            case 2 -> {
+                                System.out.println("Digite o tamanho do produto: ");
+                                String tamanho = leia.next();
+                                System.out.println("Digite a cor do produto: ");
+                                String cor = leia.next();
+                                produtos.atualizar(new Produto(codigo, nome, descricao, preco, tamanho, cor));
+                            }
+                            default -> {
+                                System.out.println("Tipo de produto inválido!");
+                            }
+                        }
+                    } else {
+                        System.out.println("\nProduto não encontrado!");
+                    }
+                    
                     keyPress();
                     break;
                 
                 case 5:
                     System.out.println("Remover Produto\n\n");
+                    System.out.println("Digite o código do produto: ");
+                    codigo = leia.nextInt();
+                    produtos.deletar(codigo); 
                     
                     keyPress();
                     break;

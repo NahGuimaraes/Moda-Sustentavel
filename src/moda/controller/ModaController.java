@@ -9,26 +9,32 @@ import moda.repository.ModaRepository;
 
 
 public class ModaController implements ModaRepository{
-
-	@SuppressWarnings("unused")
-	private ArrayList<Moda> listaModa = new ArrayList<Moda>();
-	int numero = 0;
+	private ArrayList<Moda> listaProduto = new ArrayList<Moda>();
+	private String nome = null;
+	
 	
 	@Override
 	public void procurarPorCodigo(int codigo) {
-		// TODO Auto-generated method stub
-		
+		var produto = buscarNaCollection(codigo);
+		if (produto != null) {
+		    produto.visualizar();
+		} else {
+		    System.out.println("Produto não encontrado!");
+		}
 	}
 
 	@Override
 	public void listarTodas() {
-		// TODO Auto-generated method stub
+		for (var moda : listaProduto) {
+			moda.visualizar();
+		}
 		
 	}
 
 	@Override
-	public void cadastrar(Produto produto) {
-		// TODO Auto-generated method stub
+	public void cadastrar(Moda produto) {
+		listaProduto.add(produto);
+		System.out.println("\nA Cadastrar Produto:" + produto.getNome() + "Foi criado com Sucesso!");
 		
 	}
 
@@ -62,4 +68,29 @@ public class ModaController implements ModaRepository{
 		
 	}
 
+	@Override
+	public void cadastrar(Produto produto) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
+	private int numero = 0;
+
+	public int gerarNumero() {
+	    return ++numero;
+	}
+    
+	public Moda buscarNaCollection(int codigo) {
+	    for (var produto : listaProduto) {
+	        if (produto.getCodigo() == codigo) {
+	            return produto;
+	        }
+	    }
+	    return null;
+	
+			
+		
+	}
 }
+
