@@ -12,44 +12,48 @@ import moda.util.Cores;
 
 public class Produto {
 
+	 public Produto(int i, String string, String string2, float f, String string3, boolean b) {
+		
+	}
+
+	public Produto(int codigo, String nome, String descricao, float preco, String tamanho, String cor) {
 	
-	public Produto(int i, String string, String string2, float f) {
-		
 	}
-		
 
-	public Produto(int i, String string, String string2, float f, String string3, boolean b) {
+	public Produto(int codigo, String nome, String descricao, float preco) {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Produto(int codigo, String nome, String string, float preco, String tamanho, String cor) {
+	public Produto(int gerarCodigo, String string, String string2, float f, String string3, int i) {
 		// TODO Auto-generated constructor stub
 	}
 
-
+	@SuppressWarnings("unused")
 	public static void main(String[] args) {
      ModaController produtos = new ModaController();
 		
 		
 	Scanner leia = new Scanner(System.in);
 	
-		int opcao, codigo, tipo, estoque;
-		String nome, descricao, material;
+		int opcao, codigo, tipo, estoque = 0;
+		String nome, descricao, material = null;
 		float preco;
 		
-		System.out.println("\nCadastrar Produtos\n");
-		Produto p1 = new Produto(1, "Vestido Sustentável", "Vestido feito de material reciclado", 200.0f, "Algodão Orgânico", true);
-		Produto.cadastrar(p1);
-		Produto p2 = new Produto(2, "Camiseta Ecológica", "Camiseta feita de material orgânico", 50.0f, "Algodão Orgânico", true);
-		Produto.cadastrar(p2);
-		Produto p3 = new Produto(3, "Calça Sustentável", "Calça feita de material reciclado", 150.0f, "Tecido Reciclado", true);
-		Produto.cadastrar(p3);
-		Produto p4 = new Produto(4, "Bolsa Ecológica", "Bolsa feita de material orgânico", 100.0f, "Algodão Orgânico", true);
-		Produto.cadastrar(p4);
-		
-		Produto.listarTodas();
+		System.out.println("\nCriar Produtos\n");
 
+		ModaOrganica mo1 = new ModaOrganica(produtos.gerarCodigo(), "Camiseta", "Algodão Orgânico", 29.99f, "P", 10, "Certificação Orgânica", false, material);
+		produtos.cadastrar(mo1);
 
+		ModaOrganica mo2 = new ModaOrganica(produtos.gerarCodigo(), "Calça", "Coton Orgânico", 49.99f, "M", 20, "Certificação Orgânica", false, material);
+		produtos.cadastrar(mo2);
+
+		ModaReciclavel mr1 = new ModaReciclavel(produtos.gerarCodigo(), "Vestido", "Reciclado", 99.99f, "G", 5, 10, "Materiais Reciclados", estoque, material);
+		produtos.cadastrar(mr1);
+
+		ModaReciclavel mr2 = new ModaReciclavel(produtos.gerarCodigo(), "Bolsa", "Eco-friendly", 39.99f, "P", 15, 5, "Materiais Reciclados", estoque, material);
+		produtos.cadastrar(mr2);
+
+		produtos.listarTodos();
 		int opcao1;
 
         while (true) {

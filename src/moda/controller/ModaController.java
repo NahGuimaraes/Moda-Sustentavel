@@ -39,14 +39,30 @@ public class ModaController implements ModaRepository{
 	}
 
 	@Override
-	public void atualizar(Produto produto) {
-		// TODO Auto-generated method stub
+	public void atualizar(Moda produto) {
+    var buscaProduto = buscarNaCollection(produto.getCodigo());
+		    if (buscaProduto != null) {
+		        listaProduto.set(listaProduto.indexOf(buscaProduto), produto);
+		        System.out.println("\nO Produto código: " + produto.getCodigo() + " foi atualizado com sucesso!");
+		    } else {
+		        System.out.println("\nO Produto código: " + produto.getCodigo() + " não foi encontrado!");
+		    }
 		
 	}
 
+	
+
 	@Override
 	public void deletar(int codigo) {
-		// TODO Auto-generated method stub
+     var produto = buscarNaCollection(codigo);
+		    if (produto != null) {
+		       
+				if (listaProduto.remove(produto) == true)
+		            System.out.println("\nO Produto código: " + codigo + " foi deletado com sucesso!");
+		    } else {
+		        System.out.println("\nO Produto código: " + codigo + " não foi encontrado!");
+		    }
+		
 		
 	}
 
@@ -92,5 +108,25 @@ public class ModaController implements ModaRepository{
 			
 		
 	}
+
+	@Override
+	public void atualizar(Produto produto) {
+		
+		
+	}
+
+	public int gerarCodigo() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void listarTodos() {
+		// TODO Auto-generated method stub
+		
+	}
+
+	
 }
+
+
 

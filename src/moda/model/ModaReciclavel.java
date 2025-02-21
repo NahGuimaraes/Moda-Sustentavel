@@ -7,13 +7,16 @@ public class ModaReciclavel extends Produto {
 	private int quantidadeReciclada;
     private String materialReciclado;
 
-    public ModaReciclavel(int codigo, String nome, String descricao, float preco, int quantidadeReciclada, String materialReciclado) {
-        super(codigo, nome, descricao, preco);
+    public ModaReciclavel(int gerarCodigo, String nome, String descricao, float preco, String string,
+			int quantidadeReciclada2, int i, String materialReciclado2, int quantidadeReciclada, String materialReciclado) {
+        super(gerarCodigo, nome, descricao, preco);
         this.quantidadeReciclada = quantidadeReciclada;
         this.materialReciclado = materialReciclado;
     }
 
-    public int getQuantidadeReciclada() {
+
+
+	public int getQuantidadeReciclada() {
         return quantidadeReciclada;
     }
 

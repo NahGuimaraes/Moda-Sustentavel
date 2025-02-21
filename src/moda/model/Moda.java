@@ -3,9 +3,9 @@ package moda.model;
 public abstract class Moda {
 
 	private int codigo;
-    private String nome;
-    private String descricao;
-    private float preco;
+    private static String nome;
+    private static String descricao;
+    private static float preco;
     private String material;
     private boolean eSustentavel;
 
@@ -22,7 +22,7 @@ public abstract class Moda {
            boolean eSustentavel) {
         this.codigo = codigo;
         this.nome = nome;
-        this.descricao = descricao;
+        Moda.descricao = descricao;
         this.preco = preco;
         this.material = material;
         this.eSustentavel = eSustentavel;
@@ -36,7 +36,7 @@ public abstract class Moda {
         this.codigo = codigo;
     }
 
-    public String getNome() {
+    public static String getNome() {
         return nome;
     }
 
@@ -44,7 +44,7 @@ public abstract class Moda {
         this.nome = nome;
     }
 
-    public String getDescricao() {
+    public static String getDescricao() {
         return descricao;
     }
 
@@ -52,7 +52,7 @@ public abstract class Moda {
         this.descricao = descricao;
     }
 
-    public float getPreco() {
+    public static float getPreco() {
         return preco;
     }
 

@@ -17,5 +17,6 @@ public interface ModaRepository {
 	public void devolver(int codigo, int quantidade);
 	public void atualizarEstoque(int codigo, int quantidade);
 	void cadastrar(Moda produto);
+	void atualizar(Moda produto);
 	
 }
